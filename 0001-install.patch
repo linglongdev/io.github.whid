@@ -1,0 +1,56 @@
+From 97a4897b7ab184834657906d682db6d3cb59b2f4 Mon Sep 17 00:00:00 2001
+From: wjyrich <1071633242@qq.com>
+Date: Wed, 14 Aug 2024 17:56:05 +0800
+Subject: [PATCH] install
+
+---
+ whid.desktop | 11 +++++++++++
+ whid.pro     | 13 +++++++------
+ 2 files changed, 18 insertions(+), 6 deletions(-)
+ create mode 100644 whid.desktop
+
+diff --git a/whid.desktop b/whid.desktop
+new file mode 100644
+index 0000000..c21cf36
+--- /dev/null
++++ b/whid.desktop
+@@ -0,0 +1,11 @@
++[Desktop Entry]
++Categories=Accessibility;Qt;Utility;
++Exec=whid
++Name=whid
++Name[zh_CN]=whid
++Icon=whid
++StartupNotify=false
++Terminal=false
++Type=Application
++GenericName=whid
++Version=2.0.2
+\ No newline at end of file
+diff --git a/whid.pro b/whid.pro
+index 7f02516..c4f23e9 100644
+--- a/whid.pro
++++ b/whid.pro
+@@ -26,12 +26,13 @@ macx {
+ }
+ 
+ linux {
+-    DIST_DIR = $$(DIST_DIR)
+-    isEmpty(DIST_DIR) {
+-        DIST_DIR = $$_PRO_FILE_PWD_/../dist/desktop-linux
+-    }
+-    target.path = $${DIST_DIR}/root/usr/bin
+-    INSTALLS += target
++target.path = $$PREFIX/bin
++desktop.files = whid.desktop
++desktop.path = $$PREFIX/share/applications/
++icons.path = $$PREFIX/share/icons
++icons.files = res/icons/whid.svg
++
++INSTALLS += target desktop icons
+ }
+ 
+ 
+-- 
+2.43.4
+

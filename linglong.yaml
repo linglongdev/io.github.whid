@@ -1,0 +1,28 @@
+version: "1"
+
+package:
+  id: io.github.whid
+  name: whid
+  version: 2.0.2.1
+  kind: app
+  description: |
+    What Have I Done - Time Tracker for Freelancers and Individual Contractors
+
+command:
+  - /opt/apps/io.github.whid/files/bin/whid
+
+base: org.deepin.foundation/23.0.0
+runtime: org.deepin.Runtime/23.0.1
+
+sources:
+  - kind: git
+    url: https://github.com/jgaa/whid.git
+    version: master
+    commit: c41ea0871b9cc29446668d4f181d18a33c11fe9c
+
+build: |
+  cd /project/linglong/sources/whid.git
+  git apply ../../../0001-install.patch
+  qmake -makefile PREFIX=${PREFIX} LIB_INSTALL_DIR=${PREFIX}/lib/${TRIPLET}
+  make -j$(nproc)
+  make install
